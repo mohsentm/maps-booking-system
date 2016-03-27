@@ -8,14 +8,8 @@ Author: Seyed Mohsen Hosseini
 Author URI: http://mohsentm.ir
 License: GPL
 */
-// update plugin library
-require 'plugin-update-checker/plugin-update-checker.php';
-$className = PucFactory::getLatestClassVersion('PucGitHubChecker');
-$myUpdateChecker = new $className(
-	'https://github.com/mohsentm/maps-booking-system/',
-	__FILE__,
-	'master'
-);
+
+
 
 // plugin db connection function
 require_once("lib/db_function.php");
