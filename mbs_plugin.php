@@ -140,11 +140,9 @@ class MBS_Plugin {
 				    	$calendar_info['capacity'] 	=  $calendar_info_row->c_capacity ;
 				    	$calendar_info['price']		=  $calendar_info_row->c_price ;
 				    	$calendar_info['mode'] 		=  $calendar_info_row->c_mode;
+                        $calendar_info['key'] 		=  $calendar_info_row->c_key;
 				    }
 			}
-			$file_name = "calendar_".$_REQUEST['subpage'].".p12";
-	                if (file_exists(dirname(__FILE__)."/auth/p12files/" . $file_name))
-	                	$p12_check = true;
 			
 			include("theme/maps_booking_setting_page.php");
 		}
@@ -164,13 +162,8 @@ class MBS_Plugin {
 			    	$calendar_info['capacity'] 	=  $calendar_info_row->c_capacity ;
 			    	$calendar_info['price']		=  $calendar_info_row->c_price ;
 			    	$calendar_info['mode'] 		=  $calendar_info_row->c_mode;
+                    $calendar_info['key'] 		=  $calendar_info_row->c_key;
 			    }
-
-			$file_name = "calendar_".$_REQUEST['subpage'].".p12";
-	                if (file_exists(dirname(__FILE__)."/auth/p12files/" . $file_name))
-	                	$p12_check = true;
-	                else
-	                	$p12_check = false;
 
 			include("theme/maps_booking_setting_page.php");
 		}
@@ -196,11 +189,8 @@ class MBS_Plugin {
 			    	$calendar_info['capacity'] 	=  $calendar_info_row->c_capacity ;
 			    	$calendar_info['price']		=  $calendar_info_row->c_price ;
 			    	$calendar_info['mode'] 		=  $calendar_info_row->c_mode;
+                    $calendar_info['key'] 		=  $calendar_info_row->c_key;
 			    }
-			    
-			$file_name = "calendar_".$_REQUEST['subpage'].".p12";
-			if (file_exists(dirname(__FILE__)."/auth/p12files/" . $file_name))
-				$p12_check = true;
 			        	
 			include("theme/maps_booking_setting_page.php");
 			}
@@ -226,11 +216,8 @@ class MBS_Plugin {
 			    	$calendar_info['capacity'] 	=  $calendar_info_row->c_capacity ;
 			    	$calendar_info['price']		=  $calendar_info_row->c_price ;
 			    	$calendar_info['mode'] 		=  $calendar_info_row->c_mode;
-			    }
-			    
-			$file_name = "calendar_".$_REQUEST['subpage'].".p12";
-	                if (file_exists(dirname(__FILE__)."/auth/p12files/" . $file_name))
-	                	$p12_check = true;
+                    $calendar_info['key'] 		=  $calendar_info_row->c_key;
+			    }			    
 		                	
 		    	include("theme/maps_booking_setting_page.php");
 		    }
@@ -338,6 +325,11 @@ class MBS_Plugin {
                 	unlink(dirname(__FILE__)."/auth/p12files/" . $file_name);
 
                 move_uploaded_file($File["tmp_name"], dirname(__FILE__)."/auth/p12files/" .$file_name);
+                
+                $key = file_get_contents(dirname(__FILE__)."/auth/p12files/" .$file_name);			
+		$upload_response = db_update('maps_booking_system_calendar',array('c_key' => $key),array('c_id' => $id));
+		
+		unlink(dirname(__FILE__)."/auth/p12files/" . $file_name);
 	    }
 	    return $upload_response;
 	}	
@@ -483,3 +475,4 @@ class MBS_Plugin {
 
 
 }
+

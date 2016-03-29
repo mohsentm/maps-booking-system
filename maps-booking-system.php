@@ -3,13 +3,14 @@
 Plugin Name: maps-booking-system
 Plugin URI: http://mohsentm.ir
 Description: booking system on the top of google calendar
-Version: 2.8 beta
+Version: 2.8.1 beta
 Author: Seyed Mohsen Hosseini
 Author URI: http://mohsentm.ir
 License: GPL
 */
+
 // update plugin library
-require 'plugin-update-checker/plugin-update-checker.php';
+require 'lib/update-checker/plugin-update-checker.php';
 $className = PucFactory::getLatestClassVersion('PucGitHubChecker');
 $myUpdateChecker = new $className(
 	'https://github.com/mohsentm/maps-booking-system/',

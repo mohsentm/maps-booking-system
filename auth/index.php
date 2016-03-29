@@ -39,30 +39,32 @@ require_once 'Google/autoload.php';
  Add the Email address as a user at the 	
  ACCOUNT Level in the GA admin. 	 	
  ************************************************/
- 	if(@$_GET["cid"] == NULL)
- 		exit();
- 	 $calendar_info = calender_info($_GET["cid"]);
- 	 
- 	if($calendar_info['id'] == NULL) exit();
- 	 	
-	$client_id = '[your client]';
-	$Email_address = $calendar_info['email_account'];//'zanjan@fablabajaccio-1064.iam.gserviceaccount.com';	 
-    
-	$key_file_location = 'p12files/calendar_'.$calendar_info['id'].'.p12';	 	
+if(@$_GET["cid"] == NULL)
+	exit();
+ $calendar_info = calender_info($_GET["cid"]);
+ 
+if($calendar_info['id'] == NULL) exit();
+ 	
+$client_id = '[your client]';
+$Email_address = $calendar_info['email_account'];
 
-    $config = new Google_Config();
-    $config->setClassConfig('Google_Cache_File', array('directory' => '../tmp/cache/'.$calendar_info['id']));
+//$key_file_location = 'p12files/calendar_'.$calendar_info['id'].'.p12';	 	
 
-	$client = new Google_Client($config);	 	
-	$client->setApplicationName("Client_Library_Examples");
-	$key = file_get_contents($key_file_location);	 
+$config = new Google_Config();
+$config->setClassConfig('Google_Cache_File', array('directory' => '../tmp/cache/'.$calendar_info['id']));
+
+$client = new Google_Client($config);	 	
+$client->setApplicationName("Client_Library_Examples");
+
+//$key = file_get_contents($key_file_location);	 
+$key = $calendar_info['key'];
 
 // separate additional scopes with a comma	 
 $scopes ="https://www.googleapis.com/auth/calendar.readonly"; 	
 $cred = new Google_Auth_AssertionCredentials(	 
 	$Email_address,	 	 
 	array($scopes),	 	
-	$key	 	 
+	$key 
 	);	 	
 $client->setAssertionCredentials($cred);
 if($client->getAuth()->isAccessTokenExpired()) {	 	
@@ -159,4 +161,5 @@ if ($client->getAccessToken()) {
         htmlspecialchars($e->getMessage()));
   }
 }
+
 

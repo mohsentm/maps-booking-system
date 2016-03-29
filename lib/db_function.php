@@ -53,7 +53,8 @@ function create_plugin_table()
 		c_calendar_id varchar(100) DEFAULT '' NOT NULL,				
 		c_capacity varchar(55) DEFAULT '' NOT NULL,
 		c_price varchar(55) DEFAULT '' NOT NULL,
-        	c_mode varchar(12) DEFAULT 'task_base' NOT NULL,
+        c_mode varchar(12) DEFAULT 'task_base' NOT NULL,
+        c_key MEDIUMBLOB NOT NULL,
 		UNIQUE KEY id (c_id)
 	) $charset_collate;";
 

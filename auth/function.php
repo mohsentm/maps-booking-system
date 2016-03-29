@@ -23,6 +23,7 @@ function config_db()
     return $table_prefix;
 }
 
+
 /**
  * This function load the calendar configuration information on the database
  * 
@@ -35,7 +36,7 @@ function calender_info($id)
     $id = trim($id);
     $db = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME.";charset=".DB_CHARSET, DB_USER, DB_PASSWORD);	
 
-    $query = "SELECT c_id,c_email_account,c_calendar_id FROM ".$table_prefix."maps_booking_system_calendar WHERE c_id = :id";
+    $query = "SELECT c_id,c_email_account,c_calendar_id,c_key FROM ".$table_prefix."maps_booking_system_calendar WHERE c_id = :id";
     $result = $db->prepare($query);
     $result->execute(array('id'=>$id));
     foreach($result as $result_row)
@@ -43,7 +44,9 @@ function calender_info($id)
         $return['id']            = $result_row['c_id'];		
         $return['email_account'] = $result_row['c_email_account'];
         $return['calendar_id']   = $result_row['c_calendar_id'];
+        $return['key']            = $result_row['c_key'];	
     }
     return $return;
 }
 ?>
+

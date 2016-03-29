@@ -141,7 +141,7 @@ else
 
 				<hr>
 				<h2>Upload the google account file:</h2>
-			<?php if(isset($p12_check)&& $p12_check == true):  ?>
+			<?php if(isset($calendar_info['key'])&& $calendar_info['key'] != NULL):  ?>
 				<div class="alert alert-success" role="alert" style="width: 125px;">p12 file is exist</div>
 			<?php else: ?>
 				<div class="alert alert-danger" role="alert" style="width: 149px;">p12 file is not exist</div>
